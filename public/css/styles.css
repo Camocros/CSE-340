@@ -1,6 +1,273 @@
+:root {
+  --primary-color: #0d47a1; /* Dark blue for strong contrast */
+  --secondary-color: #1976d2; 
+  --text-main: #333333;
+  --text-light: #ffffff;
+  --bg-color: #f4f4f4;
+  --bg-card: #ffffff;
+  --header-bg: #ffffff;
+  --nav-bg: #333333;
+  --footer-bg: #e0e0e0;
+}
+
 /******* Change Box Model ***************/
 *,
 *:before,
 *:after {
   box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  color: var(--text-main);
+  background-color: var(--bg-color);
+  background-image: url('../images/site/checkerboard.jpg');
+  line-height: 1.6;
+}
+
+/* ============================
+   Typography / Globals
+============================ */
+h1, h2, h3, h4 {
+  margin-top: 0;
+  color: var(--primary-color);
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 700;
+}
+a:hover {
+  text-decoration: underline;
+  color: var(--secondary-color);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ============================
+   Header Structure
+============================ */
+#top-header {
+  background-color: var(--header-bg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.site-listing a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-main);
+  text-decoration: none;
+}
+
+#site-logo {
+  width: 40px; 
+}
+
+.site-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+#tools a {
+  font-weight: 700;
+  padding: 0.5rem;
+}
+
+/* ============================
+   Navigation Structure
+============================ */
+nav {
+  background-color: var(--nav-bg);
+}
+
+.nav-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-list li {
+  text-align: center;
+}
+
+.nav-list a {
+  display: block;
+  padding: 1rem;
+  color: var(--text-light);
+  font-weight: bold;
+}
+.nav-list a:hover {
+  background-color: var(--primary-color);
+  text-decoration: none;
+}
+
+/* ============================
+   Main Content Layout
+============================ */
+main {
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page-title {
+  margin-bottom: 1rem;
+}
+
+/* Hero Section */
+.hero-section {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.hero-image {
+  width: 100%;
+}
+
+.hero-content {
+  position: absolute;
+  top: 10%;
+  left: 5%;
+  background-color: rgba(255, 255, 255, 0.85); /* Readability layer */
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+.hero-content h2 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero-content p {
+  margin: 0.2rem 0;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.cta-image {
+  width: 150px;
+  margin-top: 10px;
+}
+
+/* Home Grid Content */
+.home-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Upgrades Section */
+.upgrades-section {
+  background-color: var(--bg-card);
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.upgrades-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.upgrade-item {
+  text-align: center;
+  background-color: var(--bg-color);
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+.upgrade-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px; 
+  background-color: #fff;
+  margin-bottom: 0.5rem;
+  border-radius: 4px;
+}
+
+.upgrade-image-container img {
+  max-height: 100%;
+}
+
+/* Reviews Section */
+.reviews-section {
+  background-color: var(--bg-card);
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.reviews-list {
+  padding-left: 1.5rem;
+}
+
+.reviews-list li {
+  margin-bottom: 0.5rem;
+}
+
+/* ============================
+   Footer
+============================ */
+footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: var(--footer-bg);
+  border-top: 3px solid var(--primary-color);
+}
+
+.copyright {
+  margin: 0;
+  font-weight: 700;
+}
+
+/* ============================
+   Media Queries for Larger Screens
+============================ */
+@media screen and (min-width: 768px) {
+  
+  /* Horizontal Navigation */
+  .nav-list {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  
+  .nav-list a {
+    padding: 1rem 2rem;
+  }
+  
+  /* Hero Sizing Adjustments */
+  .hero-content {
+    top: 15%;
+    left: 10%;
+    padding: 2rem;
+  }
+  
+  .hero-content h2 {
+    font-size: 2rem;
+  }
+  
+  /* Side by side layout for main content */
+  .home-grid {
+    flex-direction: row-reverse; /* Reverses order visually if needed, let's keep it row for Delorean left, reviews right */
+    justify-content: space-between;
+  }
+  
+  .upgrades-section,
+  .reviews-section {
+    flex: 1;
+  }
 }
