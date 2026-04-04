@@ -1,0 +1,47 @@
+<% if (title) { %>
+  <h1><%= title %></h1>
+<% } else {
+    res.redirect('/')
+} %>
+
+<% if (locals.errors) { %>
+  <ul class="notice">
+  <% errors.array().forEach(error => { %>
+    <li><%= error.msg %></li>
+  <%  }) %>
+  </ul>
+<% } %>
+
+<form id="addInventoryForm" action="/inv/add-inventory" method="post">
+  <label for="classificationList">Classification</label><br>
+  <%- classificationList %><br><br>
+
+  <label for="invMake">Make</label><br>
+  <input type="text" id="invMake" name="inv_make" required minlength="3" value="<%= locals.inv_make %>"><br><br>
+
+  <label for="invModel">Model</label><br>
+  <input type="text" id="invModel" name="inv_model" required minlength="3" value="<%= locals.inv_model %>"><br><br>
+
+  <label for="invDescription">Description</label><br>
+  <textarea id="invDescription" name="inv_description" required><%= locals.inv_description %></textarea><br><br>
+
+  <label for="invImage">Image Path</label><br>
+  <input type="text" id="invImage" name="inv_image" required value="<%= locals.inv_image || '/images/vehicles/no-image.png' %>"><br><br>
+
+  <label for="invThumbnail">Thumbnail Path</label><br>
+  <input type="text" id="invThumbnail" name="inv_thumbnail" required value="<%= locals.inv_thumbnail || '/images/vehicles/no-image-tn.png' %>"><br><br>
+
+  <label for="invPrice">Price</label><br>
+  <input type="number" id="invPrice" name="inv_price" required step="any" value="<%= locals.inv_price %>"><br><br>
+
+  <label for="invYear">Year</label><br>
+  <input type="number" id="invYear" name="inv_year" required min="1000" max="9999" value="<%= locals.inv_year %>"><br><br>
+
+  <label for="invMiles">Miles</label><br>
+  <input type="number" id="invMiles" name="inv_miles" required value="<%= locals.inv_miles %>"><br><br>
+
+  <label for="invColor">Color</label><br>
+  <input type="text" id="invColor" name="inv_color" required value="<%= locals.inv_color %>"><br><br>
+
+  <input type="submit" value="Add Vehicle">
+</form>
