@@ -1,0 +1,28 @@
+<div class="account-container">
+  <% if (errors) { %>
+    <ul class="notice">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+   </ul>
+  <% } %>
+
+  <div class="form-wrapper">
+    <form id="loginForm" action="/account/login" method="post">
+      <div class="form-group">
+        <label for="account_email">Email Address:</label>
+        <input type="email" id="account_email" name="account_email" required value="<%= locals.account_email %>">
+      </div>
+      
+      <div class="form-group">
+        <label for="account_password">Password:</label>
+        <input type="password" id="account_password" name="account_password" required>
+      </div>
+
+      <button type="submit" class="submit-btn" id="loginBtn">Login</button>
+    </form>
+    <div class="register-link-container">
+      <p>No account? <a href="/account/register">Sign-up</a></p>
+    </div>
+  </div>
+</div>
