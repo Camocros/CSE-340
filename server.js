@@ -103,6 +103,6 @@ app.use(async (err, req, res, next) => {
 /* ***********************
  * Start Server
  *************************/
-app.listen(port, host, () => {
+app.listen(port, () => {
   console.log(`app listening on http://${host}:${port}`)
 })
