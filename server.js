@@ -9,7 +9,7 @@
 const expressLayouts = require("express-ejs-layouts")
 const express = require("express")
 const session = require("express-session")
-const pool = require('./database/')
+const pool = require("./database/")
 require("dotenv").config()
 
 const app = express()
@@ -17,25 +17,27 @@ const app = express()
 /* ***********************
  * Middleware
  *************************/
-app.use(session({
-  store: new (require('connect-pg-simple')(session))({
-    createTableIfMissing: true,
-    pool,
-  }),
-  secret: process.env.SESSION_SECRET,
-  resave: true,
-  saveUninitialized: true,
-  name: 'sessionId',
-}))
+app.use(
+  session({
+    store: new (require("connect-pg-simple")(session))({
+      createTableIfMissing: true,
+      pool,
+    }),
+    secret: process.env.SESSION_SECRET || "mySecretKey",
+    resave: true,
+    saveUninitialized: true,
+    name: "sessionId",
+  })
+)
 
 // Express Messages Middleware
-app.use(require('connect-flash')())
+app.use(require("connect-flash")())
 app.use(function (req, res, next) {
-  res.locals.messages = require('express-messages')(req, res)
+  res.locals.messages = require("express-messages")(req, res)
   next()
 })
 
-app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }))
 
 const static = require("./routes/static")
 const inventoryRoute = require("./routes/inventoryRoute")
@@ -66,14 +68,12 @@ app.get("/", utilities.handleErrors(async function (req, res) {
  * Local Server Information
  *************************/
 const port = process.env.PORT || 5500
-const host = process.env.HOST || "localhost"
-
 
 /* ***********************
  * Catch 404 and forward to error handler
  *************************/
 app.use(async (req, res, next) => {
-  next({ status: 404, message: 'Sorry, we appear to have lost that page.' })
+  next({ status: 404, message: "Sorry, we appear to have lost that page." })
 })
 
 /* ***********************
@@ -90,13 +90,13 @@ app.use(async (err, req, res, next) => {
   res.status(err.status || 500).render("errors/error", {
     title: err.status || "Server Error",
     message: err.message || "Sorry, an unexpected error occurred.",
-    nav
+    nav,
   })
 })
 
 /* ***********************
  * Start Server
  *************************/
-app.listen(port, host, () => {
-  console.log(`app listening on http://${host}:${port}`)
+app.listen(port, "0.0.0.0", () => {
+  console.log(`app listening on port ${port}`)
 })
