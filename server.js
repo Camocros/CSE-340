@@ -42,6 +42,7 @@ app.use(cookieParser())
 const static = require("./routes/static")
 const inventoryRoute = require("./routes/inventoryRoute")
 const accountRoute = require("./routes/accountRoute")
+const favoriteRoute = require("./routes/favoriteRoute")
 const utilities = require("./utilities/")
 
 app.use(utilities.checkJWTToken)
@@ -59,6 +60,7 @@ app.set("layout", "./layouts/layout")
 app.use(static)
 app.use("/inv", inventoryRoute)
 app.use("/account", accountRoute)
+app.use("/favorites", favoriteRoute)
 
 /* ***********************
  * Index Route

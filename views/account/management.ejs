@@ -4,8 +4,8 @@
   <% } %>
 
   <p>You're logged in.</p>
-  
   <p><a href="/account/update/<%= locals.accountData.account_id %>">Update Account Information</a></p>
+  <p><a href="/favorites/">My Favorites</a></p>
 
   <% if (locals.accountData && (locals.accountData.account_type === 'Employee' || locals.accountData.account_type === 'Admin')) { %>
     <h3>Inventory Management</h3>

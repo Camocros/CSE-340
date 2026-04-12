@@ -7,10 +7,18 @@ async function buildByInventoryId(req, res, next) {
   const detailHTML = await utilities.buildVehicleDetail(data)
   let nav = await utilities.getNav()
 
+  let isFavorite = false
+  if (res.locals.loggedin && res.locals.accountData) {
+    const favoriteModel = require("../models/favorite-model")
+    isFavorite = await favoriteModel.checkFavorite(res.locals.accountData.account_id, inv_id)
+  }
+
   res.render("inventory/detail", {
     title: `${data.inv_make} ${data.inv_model}`,
     nav,
     detailHTML,
+    inv_id,
+    isFavorite,
   })
 }
 
