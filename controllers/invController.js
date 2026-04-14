@@ -4,13 +4,26 @@ const utilities = require("../utilities/")
 async function buildByInventoryId(req, res, next) {
   const inv_id = parseInt(req.params.invId)
   const data = await invModel.getInventoryById(inv_id)
+  
+  if (!data) {
+    const err = new Error("Sorry, the requested vehicle could not be found.")
+    err.status = 404
+    return next(err)
+  }
+
   const detailHTML = await utilities.buildVehicleDetail(data)
   let nav = await utilities.getNav()
 
   let isFavorite = false
   if (res.locals.loggedin && res.locals.accountData) {
-    const favoriteModel = require("../models/favorite-model")
-    isFavorite = await favoriteModel.checkFavorite(res.locals.accountData.account_id, inv_id)
+    try {
+      const favoriteModel = require("../models/favorite-model")
+      isFavorite = await favoriteModel.checkFavorite(res.locals.accountData.account_id, inv_id)
+    } catch (dbError) {
+      console.error("Error checking favorite status: ", dbError)
+      // Si la tabla de favoritos no existe en Render u otro problema, no crasheamos la página:
+      isFavorite = false
+    }
   }
 
   res.render("inventory/detail", {
